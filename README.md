@@ -179,7 +179,7 @@ Development: Google Colab, GitHub
 CareAI-ML-Risk-Prediction/
 │
 ├── README.md
-├── requirements.txt
+|
 │
 ├── notebooks/
 │   └── CareAI_Development.ipynb
