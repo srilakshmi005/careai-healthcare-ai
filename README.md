@@ -1,5 +1,4 @@
-# careai-healthcare-ai
-Production-ready Healthcare AI platform combining ML risk prediction, RAG, LLM evaluation, SQL, monitoring, and deployment.
+
 # 🏥 CareAI — Healthcare 30-Day Readmission Risk Prediction
 
 CareAI is an end-to-end Machine Learning system designed to predict the risk of hospital readmission within 30 days using publicly available, de-identified healthcare data.
