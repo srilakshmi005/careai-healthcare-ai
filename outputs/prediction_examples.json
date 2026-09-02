@@ -1,0 +1,72 @@
+[
+    {
+        "sample_id": 1,
+        "risk_probability": 0.1401,
+        "risk_percentage": 14.01,
+        "predicted_class": 0,
+        "risk_level": "Low"
+    },
+    {
+        "sample_id": 2,
+        "risk_probability": 0.0564,
+        "risk_percentage": 5.64,
+        "predicted_class": 0,
+        "risk_level": "Low"
+    },
+    {
+        "sample_id": 3,
+        "risk_probability": 0.0743,
+        "risk_percentage": 7.43,
+        "predicted_class": 0,
+        "risk_level": "Low"
+    },
+    {
+        "sample_id": 4,
+        "risk_probability": 0.1853,
+        "risk_percentage": 18.53,
+        "predicted_class": 1,
+        "risk_level": "Medium"
+    },
+    {
+        "sample_id": 5,
+        "risk_probability": 0.1821,
+        "risk_percentage": 18.21,
+        "predicted_class": 1,
+        "risk_level": "Medium"
+    },
+    {
+        "sample_id": 6,
+        "risk_probability": 0.0189,
+        "risk_percentage": 1.89,
+        "predicted_class": 0,
+        "risk_level": "Low"
+    },
+    {
+        "sample_id": 7,
+        "risk_probability": 0.0543,
+        "risk_percentage": 5.43,
+        "predicted_class": 0,
+        "risk_level": "Low"
+    },
+    {
+        "sample_id": 8,
+        "risk_probability": 0.078,
+        "risk_percentage": 7.8,
+        "predicted_class": 0,
+        "risk_level": "Low"
+    },
+    {
+        "sample_id": 9,
+        "risk_probability": 0.1782,
+        "risk_percentage": 17.82,
+        "predicted_class": 1,
+        "risk_level": "Medium"
+    },
+    {
+        "sample_id": 10,
+        "risk_probability": 0.2478,
+        "risk_percentage": 24.78,
+        "predicted_class": 1,
+        "risk_level": "Medium"
+    }
+]

@@ -1,0 +1,2 @@
+model,algorithm,prediction_target,threshold,accuracy,precision,recall,f1_score,roc_auc,pr_auc,brier_score,training_samples,testing_samples,production_features,leakage_feature_removed
+careai_xgboost_v1,XGBoost,30-day hospital readmission,0.15,0.7744,0.2075,0.3624,0.2639,0.651,0.2026,0.0958,81412,20354,46,discharge_disposition_id
