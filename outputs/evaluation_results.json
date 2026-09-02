@@ -1,17 +1,14 @@
 {
-    "model": "careai_xgboost_v1",
+    "model_version": "careai_xgboost_v1",
     "algorithm": "XGBoost",
-    "prediction_target": "30-day hospital readmission",
-    "threshold": 0.15,
-    "accuracy": 0.7744,
-    "precision": 0.2075,
-    "recall": 0.3624,
-    "f1_score": 0.2639,
-    "roc_auc": 0.651,
-    "pr_auc": 0.2026,
-    "brier_score": 0.0958,
-    "training_samples": 81412,
-    "testing_samples": 20354,
-    "production_features": 46,
-    "leakage_feature_removed": "discharge_disposition_id"
+    "prediction_target": "30-day readmission",
+    "threshold": 0.15000000000000002,
+    "accuracy": 0.7743932396580525,
+    "precision": 0.20746155785228132,
+    "recall": 0.3623954205195949,
+    "f1_score": 0.2638666239179224,
+    "roc_auc": 0.6509832480703917,
+    "pr_auc": 0.20255623989776578,
+    "brier_score": 0.09579599389989721,
+    "test_samples": 20354
 }
