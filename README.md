@@ -1,258 +1,193 @@
+# CareAI — 30-Day Hospital Readmission Risk Prediction
 
-# 🏥 CareAI — Healthcare 30-Day Readmission Risk Prediction
+> An end-to-end machine learning pipeline for predicting the risk of hospital readmission within 30 days using healthcare encounter data.
 
-CareAI is an end-to-end Machine Learning system designed to predict the risk of hospital readmission within 30 days using publicly available, de-identified healthcare data.
+🚀 Overview
 
-The project includes data preprocessing, data leakage detection, model comparison, threshold optimization, SQL storage, prediction logging, monitoring, drift detection, FastAPI model serving, automated testing, and model versioning.
+CareAI is a machine learning project built using the **Diabetes 130-US Hospitals** dataset from the UCI Machine Learning Repository.
 
----
-
-## 🎯 Project Objective
-
-The objective of CareAI is to predict whether a patient is likely to be readmitted to a hospital within 30 days.
-
-### Workflow
-
-Healthcare Dataset → Data Inspection → Preprocessing → Leakage Detection → Model Training → Model Evaluation → Threshold Optimization → Production Model → FastAPI API → SQL Logging → Monitoring
+The project compares multiple ML models, detects potential data leakage, optimizes the classification threshold, evaluates the final production model, and uses SHAP for explainability.
 
 ---
 
-## 📊 Dataset
-
-CareAI uses the Diabetes 130-US Hospitals for Years 1999–2008 dataset from the UCI Machine Learning Repository.
-
-- Total healthcare encounters: **101,766**
-- Original features: **47**
-- Production features: **46**
-- Training records: **81,412**
-- Testing records: **20,354**
-- Prediction target: **30-day hospital readmission**
-
-The dataset is publicly available and de-identified.
-
----
-
-## 🤖 Machine Learning Models
-
-| Model | ROC-AUC | Description |
-|---|---:|---|
-| Logistic Regression | 0.6440 | Baseline model |
-| Random Forest | 0.6631 | Tree-based comparison |
-| XGBoost | 0.6920 | Initial model with potential leakage |
-| Production XGBoost | **0.6606** | Leakage-controlled model |
-
----
-
-## 🔐 Data Leakage Detection
-
-During feature-importance analysis, `discharge_disposition_id` was identified as a potentially unavailable feature at the intended prediction point.
-
-The feature was removed from the production model.
-
-### Before leakage removal
-
-**XGBoost ROC-AUC:** 0.6920
-
-### After leakage removal
-
-**Production XGBoost ROC-AUC:** 0.6606
-
-Although the ROC-AUC decreased, the production model provides a more defensible evaluation by excluding a potentially unavailable feature.
-
----
-
-## 🏆 Production Model
-
-- **Model Version:** `careai_xgboost_v1`
-- **Algorithm:** XGBoost
-- **Prediction Target:** 30-day readmission
-- **Production Features:** 46
-- **Training Rows:** 81,412
-- **Testing Rows:** 20,354
-- **ROC-AUC:** 0.6606
-- **Decision Threshold:** 0.15
-
-The trained model was saved using Joblib.
-
----
-
-## ⚖️ Threshold Optimization
-
-Multiple classification thresholds were evaluated using:
-
-- Precision
-- Recall
-- F1-score
-
-The selected development threshold is:
-
-**0.15**
-
-At threshold 0.15:
-
-- Precision: **0.213**
-- Recall: **0.347**
-- F1-score: **0.264**
-
-This demonstrates the trade-off between identifying potential readmissions and reducing false-positive predictions.
-
-The threshold is for this educational project and has not been clinically validated.
-
----
-
-## 🗄️ SQL Data Layer
-
-CareAI uses **SQLite** for data storage and prediction logging.
-
-The project created:
-
-`careai_healthcare.db`
-
-Prediction records include:
-
-- Prediction ID
-- Timestamp
-- Model version
-- Prediction
-- Risk classification
-- Probability
-- Decision threshold
-
----
-
-## 🌐 FastAPI Model Serving
-
-The trained model is exposed through a FastAPI application.
-
-### Health Endpoint
+🔄 ML Pipeline
 
 ```text
-GET /
-Prediction Endpoint
-POST /predict
-The prediction API returns information such as:
-Prediction
-Risk classification
-Probability
-Decision threshold
-Model version
-🧪 Automated Testing
-Automated API tests were implemented for:
-Health endpoint
-Prediction endpoint
-Invalid input/error handling
-Development testing completed successfully.
-📈 ML Monitoring
-CareAI includes basic monitoring for:
-Prediction counts
-High-risk predictions
-Average prediction probability
-Maximum prediction probability
-Numeric feature distributions
-Potential feature drift
-The development monitoring result was:
-No significant drift detected.
-This monitoring implementation is a demonstration and is not a clinically validated monitoring system.
-🔄 Model Versioning
-Model metadata includes:
-Project: CareAI
-Model version: careai_xgboost_v1
-Algorithm: XGBoost
-Prediction target: 30-day readmission
-Production features: 46
-Training rows: 81,412
-Testing rows: 20,354
-ROC-AUC: 0.6606
-Decision threshold: 0.15
-Leakage feature removed: discharge_disposition_id
-The project uses Joblib for model persistence and requirements.txt for dependency management.
-🛠️ Technology Stack
-Programming: Python
-Data Processing: Pandas, NumPy
-Machine Learning: Scikit-learn, XGBoost
-Database: SQLite, SQL
-API: FastAPI, Pydantic
-Model Persistence: Joblib
-Development: Google Colab, GitHub
-📁 Project Structure
-CareAI-ML-Risk-Prediction/
-│
-├── README.md
-|
-│
-├── notebooks/
-│   └── CareAI_Development.ipynb
-│
-├── app/
-│
-├── tests/
-│
-└── monitoring/
-🔬 ML Engineering Concepts Demonstrated
-Python ML development
-Data preprocessing
-Missing-value analysis
-Data leakage detection
-Model comparison
+Healthcare Dataset
+       ↓
+Exploratory Data Analysis
+       ↓
+Data Cleaning & Preprocessing
+       ↓
+Feature Engineering
+       ↓
+Train / Test Split
+       ↓
+Logistic Regression
+       ↓
+Random Forest
+       ↓
 XGBoost
-Classification
-ROC-AUC evaluation
-Precision/Recall analysis
-F1-score evaluation
-Decision-threshold optimization
-SQL data storage
-Prediction logging
-Model versioning
-REST API development
-FastAPI
-Automated API testing
-ML monitoring
-Data drift detection
-Reproducibility
-🚀 Future Improvements
-Docker containerization
-Cloud deployment
-CI/CD pipeline
-MLflow experiment tracking
-Advanced statistical drift detection
-Fairness evaluation
-Production observability
-Structured application logging
-Cloud-based model serving
-RAG-based healthcare assistant
-LLM evaluation
-AI guardrails
-🔒 Data Privacy & Safety
-CareAI does not connect to a real hospital system.
-The project uses publicly available, de-identified research data.
-No private hospital database or real-time patient information is used.
-CareAI is an educational/research project and has not been clinically validated.
-The predictions must not be used to make real-world patient-care decisions.
+       ↓
+Model Comparison
+       ↓
+Feature Importance
+       ↓
+Data Leakage Detection
+       ↓
+Leakage Feature Removal
+       ↓
+Production XGBoost
+       ↓
+Threshold Optimization
+       ↓
+Model Evaluation
+       ↓
+SHAP Explainability
+       ↓
+Model & Results Saved
+📊 Dataset
+Diabetes 130-US Hospitals for Years 1999–2008
+Total encounters: 101,766
+Original features: 47
+Production features: 46
+Training samples: 81,412
+Test samples: 20,354
+Prediction Target
+Binary classification of 30-day hospital readmission:
+0 → Not readmitted within 30 days
+1 → Readmitted within 30 days
+🧠 Machine Learning
+Models
+Logistic Regression — baseline
+Random Forest — ensemble comparison
+XGBoost — production model
+Preprocessing
+Missing-value handling
+Numerical feature scaling with StandardScaler
+Categorical encoding with OneHotEncoder
+Scikit-learn ColumnTransformer pipeline
+🔍 Data Leakage Detection
+Feature-importance analysis identified:
+discharge_disposition_id
+as a potential data-leakage feature.
+It was removed from the production feature set to create a more realistic prediction pipeline.
+🎯 Threshold Optimization
+Instead of relying only on the default 0.50 classification threshold, multiple thresholds were evaluated.
+The final production threshold was selected using F1-score optimization:
+Final threshold: 0.15
+This helps improve identification of potential readmission cases in the imbalanced dataset.
+📈 Production Model Results
+Production Model: XGBoost
+Metric
+Result
+ROC-AUC
+0.6606
+Accuracy
+0.78
+Threshold
+0.15
+Readmission Precision
+0.23
+Readmission Recall
+0.41
+Readmission F1
+0.30
+Evaluation
+The project generates:
+Confusion Matrix
+ROC Curve
+Precision-Recall Curve
+Accuracy
+Precision
+Recall
+F1-score
+ROC-AUC
+🔬 SHAP Explainability
+SHAP is used to understand how features influence XGBoost predictions.
+Current analysis:
+1,000 test samples
+2,378 transformed features
+SHAP summary visualization
+Output:
+evaluation/shap_summary.png
+💾 Saved Artifacts
+models/
+└── careai_model_v1.joblib
+
+evaluation/
+├── confusion_matrix.png
+├── roc_curve.png
+├── precision_recall_curve.png
+└── shap_summary.png
+
+outputs/
+├── evaluation_results.json
+├── metrics.csv
+└── prediction_examples.json
+The trained production pipeline is saved using Joblib and healthcare data is stored using SQLite.
+🛠️ Technologies & Tools
+Language: Python
+Machine Learning: Scikit-learn, XGBoost
+Data Processing: Pandas, NumPy
+Visualization: Matplotlib, Seaborn
+Explainable AI: SHAP
+Database: SQLite
+Model Saving: Joblib
+Environment: Google Colab, Jupyter Notebook
+Version Control: Git, GitHub
+▶️ How to Run
+Google Colab
+Open:
+CareAI_ML_Risk_Prediction.ipynb
+Install dependencies:
+!pip install ucimlrepo shap xgboost scikit-learn pandas numpy matplotlib seaborn joblib -q
+Then run the notebook from top to bottom.
+Local
+git clone https://github.com/srilakshmi005/careai-healthcare-ai.git
+cd careai-healthcare-ai
+pip install ucimlrepo shap xgboost scikit-learn pandas numpy matplotlib seaborn joblib
+jupyter notebook
+Open:
+CareAI_ML_Risk_Prediction.ipynb
+📁 Project Structure
+careai-healthcare-ai/
+│
+├── CareAI_ML_Risk_Prediction.ipynb
+├── README.md
+├── LICENSE
+│
+├── evaluation/
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── precision_recall_curve.png
+│   └── shap_summary.png
+│
+├── models/
+│   └── careai_model_v1.joblib
+│
+└── outputs/
+    ├── evaluation_results.json
+    ├── metrics.csv
+    └── prediction_examples.json
+⭐ Key Highlights
+End-to-end healthcare ML pipeline
+101K+ healthcare encounters
+Multiple ML model comparison
+XGBoost production model
+Data leakage detection & removal
+F1-based threshold optimization
+ROC-AUC: 0.6606
+Accuracy: 78%
+SHAP model explainability
+Reusable serialized ML pipeline
+SQLite data storage
+Reproducible Google Colab workflow
+⚠️ Disclaimer
+CareAI is an educational/research machine learning project and has not been clinically validated.
+It should not be used for medical diagnosis, treatment decisions, or real-world clinical decision-making.
 👩‍💻 Author
 Srilakshmi Kummari
-B.Tech Graduate | AI/ML & Software Engineering
-⭐ Project Highlights
-Component
-Result
-Healthcare encounters
-101,766
-Original features
-47
-Production features
-46
-Production algorithm
-XGBoost
-Production ROC-AUC
-0.6606
-Decision threshold
-0.15
-SQL database
-SQLite
-API framework
-FastAPI
-Automated tests
-3
-Model version
-careai_xgboost_v1
-Monitoring
-Prediction + drift monitoring
+B.Tech — Electronics & Communication Engineering
+
+**This is the version I recommend for your GitHub.** It looks much more like a professional ML portfolio project while still showing the important technical work you actually did.
