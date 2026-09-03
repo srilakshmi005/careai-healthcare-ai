@@ -46,7 +46,7 @@ Model Evaluation
 SHAP Explainability
        ↓
 Model & Results Saved
-
+----
 📊 Dataset
 Diabetes 130-US Hospitals for Years 1999–2008
 Total encounters: 101,766
@@ -58,7 +58,7 @@ Prediction Target
 Binary classification of 30-day hospital readmission:
 0 → Not readmitted within 30 days
 1 → Readmitted within 30 days
-
+---
 🧠 Machine Learning
 Models
 Logistic Regression — baseline
@@ -74,7 +74,7 @@ Feature-importance analysis identified:
 discharge_disposition_id
 as a potential data-leakage feature.
 It was removed from the production feature set to create a more realistic prediction pipeline.
-
+---
 🎯 Threshold Optimization
 Instead of relying only on the default 0.50 classification threshold, multiple thresholds were evaluated.
 The final production threshold was selected using F1-score optimization:
@@ -106,6 +106,7 @@ Precision
 Recall
 F1-score
 ROC-AUC
+---
 🔬 SHAP Explainability
 SHAP is used to understand how features influence XGBoost predictions.
 Current analysis:
@@ -114,7 +115,7 @@ Current analysis:
 SHAP summary visualization
 Output:
 evaluation/shap_summary.png
-
+---
 💾 Saved Artifacts
 models/
 └── careai_model_v1.joblib
@@ -130,7 +131,7 @@ outputs/
 ├── metrics.csv
 └── prediction_examples.json
 The trained production pipeline is saved using Joblib and healthcare data is stored using SQLite.
-
+---
 🛠️ Technologies & Tools
 Language: Python
 Machine Learning: Scikit-learn, XGBoost
@@ -141,7 +142,7 @@ Database: SQLite
 Model Saving: Joblib
 Environment: Google Colab, Jupyter Notebook
 Version Control: Git, GitHub
-
+---
 ▶️ How to Run
 Google Colab
 Open:
@@ -154,7 +155,7 @@ git clone https://github.com/srilakshmi005/careai-healthcare-ai.git
 cd careai-healthcare-ai
 pip install ucimlrepo shap xgboost scikit-learn pandas numpy matplotlib seaborn joblib
 jupyter notebook
-
+---
 Open:
 CareAI_ML_Risk_Prediction.ipynb
 📁 Project Structure
@@ -177,7 +178,7 @@ careai-healthcare-ai/
     ├── evaluation_results.json
     ├── metrics.csv
     └── prediction_examples.json
-
+---
 ⭐ Key Highlights
 End-to-end healthcare ML pipeline
 101K+ healthcare encounters
@@ -194,7 +195,7 @@ Reproducible Google Colab workflow
 ⚠️ Disclaimer
 CareAI is an educational/research machine learning project and has not been clinically validated.
 It should not be used for medical diagnosis, treatment decisions, or real-world clinical decision-making.
-
+---
 👩‍💻 Author
 Srilakshmi Kummari
 B.Tech — Electronics & Communication Engineering
